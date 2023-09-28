@@ -7,14 +7,22 @@ import { useState } from "react";
 interface Props {
   title: string;
   content: string;
+  time: string;
   index?: number;
 }
 function App() {
   const [notes, setNotes] = useState<Props[]>([]);
 
   const addItem = (inputText: Props) => {
+    const currentTime = new Date().toLocaleTimeString();
+
+    const newNote = {
+      ...inputText,
+      time: currentTime,
+    };
+
     setNotes((prevValue) => {
-      return [...prevValue, inputText];
+      return [...prevValue, newNote];
     });
   };
 
@@ -36,6 +44,7 @@ function App() {
             <Note
               id={index}
               key={index}
+              time={note.time}
               title={note.title}
               content={note.content}
               deleteItem={() => deleteItem(index)}

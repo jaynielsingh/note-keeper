@@ -3,6 +3,7 @@ import { useState } from "react";
 interface Props {
   title: string;
   content: string;
+  time: string;
 }
 
 interface CreateNoteProp {
@@ -10,7 +11,7 @@ interface CreateNoteProp {
 }
 
 const CreateNote = ({ addItem }: CreateNoteProp) => {
-  const [note, setNote] = useState<Props>({ title: "", content: "" });
+  const [note, setNote] = useState<Props>({ title: "", content: "", time: "" });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -25,13 +26,14 @@ const CreateNote = ({ addItem }: CreateNoteProp) => {
     e: React.MouseEvent<HTMLButtonElement | undefined>
   ) => {
     addItem(note);
-    setNote({ title: "", content: "" });
+
+    setNote({ title: "", content: "", time: "" });
     e.preventDefault();
   };
 
   return (
     <div className="flex justify-center">
-      <form className="flex relative  justify-center py-7 flex-col w-1/3 box-content">
+      <form className="flex relative  justify-center py-20 flex-col w-1/3 box-content">
         <input
           onChange={handleChange}
           value={note.title}
